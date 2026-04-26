@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg: #0a0b0d;
+  --surface: #111316;
+  --card: #161a1f;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e6e1;
+  --muted: #7a7870;
+  --accent: #4ade80;
+  --accent2: #86efac;
+  --amber: #fbbf24;
+  --blue: #60a5fa;
+  --coral: #f87171;
+  --mono: 'DM Mono', monospace;
+  --serif: 'DM Serif Display', serif;
+  --sans: 'Outfit', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 0.5px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,11,13,0.92);
+  backdrop-filter: blur(12px);
+}
+.logo {
+  font-family: var(--mono);
+  font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  background: var(--accent); color: #051a0b;
+  border: none; border-radius: 6px;
+  padding: 8px 16px; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* HERO */
+.hero {
+  padding: 96px 32px 72px;
+  max-width: 760px; margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--accent); letter-spacing: 0.06em;
+  border: 0.5px solid rgba(74,222,128,0.25);
+  border-radius: 4px; padding: 5px 12px;
+  margin-bottom: 32px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: 17px; color: var(--muted); line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.hero-sub strong { color: var(--text); font-weight: 500; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  background: var(--accent); color: #051a0b;
+  border: none; border-radius: 8px;
+  padding: 13px 24px; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-ghost {
+  font-family: var(--mono); font-size: 13px;
+  background: transparent; color: var(--muted);
+  border: 0.5px solid var(--border2); border-radius: 8px;
+  padding: 13px 24px; cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+/* DIVIDER */
+.divider {
+  height: 0.5px; background: var(--border);
+  margin: 0 32px;
+}
+
+/* LIVE DEMO */
+.demo-section {
+  padding: 72px 32px;
+  max-width: 760px; margin: 0 auto;
+}
+.section-label {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: 28px; font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+  line-height: 1.25;
+}
+
+.demo-box {
+  border: 0.5px solid var(--border2);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+}
+.demo-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--surface);
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot.r { background: #f87171; }
+.dot.y { background: #fbbf24; }
+.dot.g { background: var(--accent); }
+.demo-title-bar {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); margin-left: 4px;
+}
+
+/* Input area */
+.demo-input-area {
+  padding: 20px;
+  border-bottom: 0.5px solid var(--border);
+}
+.demo-input-label {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--muted); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.demo-input {
+  width: 100%;
+  background: var(--bg);
+  border: 0.5px solid var(--border2);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 12px 16px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+  min-height: 80px;
+  line-height: 1.6;
+}
+.demo-input:focus { border-color: rgba(74,222,128,0.4); }
+.demo-input::placeholder { color: var(--muted); }
+.demo-compile-btn {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  background: var(--accent); color: #051a0b;
+  border: none; border-radius: 6px;
+  padding: 9px 18px; cursor: pointer;
+  margin-top: 12px; transition: opacity 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.demo-compile-btn:hover { opacity: 0.85; }
+.demo-compile-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Pipeline visualization */
+.pipeline {
+  display: flex; align-items: stretch;
+  overflow-x: auto;
+  padding: 20px;
+  gap: 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.pipe-stage {
+  flex: 1; min-width: 110px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  position: relative;
+}
+.pipe-stage:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: 50%; transform: translateY(-50%);
+  width: 2px; height: 36px; margin-top: -4px;
+  background: var(--border);
+}
+.pipe-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 0.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+  transition: all 0.3s;
+}
+.pipe-stage.active .pipe-icon {
+  border-color: var(--accent);
+  background: rgba(74,222,128,0.1);
+}
+.pipe-stage.done .pipe-icon {
+  border-color: rgba(74,222,128,0.4);
+  background: rgba(74,222,128,0.05);
+}
+.pipe-name {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.06em;
+  text-transform: uppercase; line-height: 1.3;
+}
+.pipe-stage.active .pipe-name { color: var(--accent); }
+.pipe-stage.done .pipe-name { color: var(--accent2); opacity: 0.7; }
+
+/* Event log output */
+.event-log {
+  font-family: var(--mono); font-size: 12px;
+  padding: 20px;
+  min-height: 180px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.log-line { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 4px; }
+.log-ts { color: #3d3b36; min-width: 72px; }
+.log-type {
+  min-width: 80px; font-weight: 500; font-size: 10px;
+  padding: 1px 6px; border-radius: 3px; margin-top: 2px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.log-type.state { background: rgba(74,222,128,0.12); color: var(--accent); }
+.log-type.intent { background: rgba(96,165,250,0.12); color: var(--blue); }
+.log-type.action { background: rgba(251,191,36,0.12); color: var(--amber); }
+.log-type.render { background: rgba(248,113,113,0.12); color: var(--coral); }
+.log-msg { color: var(--text); flex: 1; }
+.log-empty { color: var(--muted); font-style: italic; font-size: 12px; opacity: 0.5; text-align: center; padding-top: 40px; }
+
+/* Replay bar */
+.replay-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  border-top: 0.5px solid var(--border);
+  background: var(--surface);
+}
+.replay-label {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted);
+}
+.replay-slider {
+  flex: 1; accent-color: var(--accent);
+}
+.replay-count {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--accent); min-width: 40px; text-align: right;
+}
+.replay-btn {
+  font-family: var(--mono); font-size: 11px;
+  background: transparent; color: var(--muted);
+  border: 0.5px solid var(--border2); border-radius: 5px;
+  padding: 5px 10px; cursor: pointer;
+  transition: all 0.2s;
+}
+.replay-btn:hover { color: var(--text); border-color: var(--border2); }
+
+/* HOW IT WORKS */
+.how-section {
+  padding: 72px 32px;
+  max-width: 760px; margin: 0 auto;
+}
+.how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.how-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.how-card:hover { border-color: var(--border2); }
+.how-card-num {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); margin-bottom: 12px;
+}
+.how-card-title {
+  font-size: 15px; font-weight: 500;
+  margin-bottom: 8px; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.how-card-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.how-card-accent { color: var(--accent); }
+
+/* FEATURES */
+.features-section {
+  padding: 72px 32px;
+  max-width: 760px; margin: 0 auto;
+}
+.features-row { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+.feature-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.2s;
+}
+.feature-item:hover { border-color: var(--border2); }
+.feature-icon {
+  width: 40px; height: 40px; border-radius: 8px;
+  border: 0.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+  background: var(--surface);
+}
+.feature-title {
+  font-size: 14px; font-weight: 500; margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.feature-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* PRICING */
+.pricing-section {
+  padding: 72px 32px;
+  max-width: 760px; margin: 0 auto;
+}
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 32px; }
+.pricing-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.pricing-card.featured {
+  border-color: rgba(74,222,128,0.3);
+  background: rgba(74,222,128,0.04);
+  position: relative;
+}
+.featured-badge {
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 9px;
+  background: var(--accent); color: #051a0b;
+  padding: 3px 10px; border-radius: 0 0 6px 6px;
+  letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+}
+.pricing-tier { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.07em; }
+.pricing-price { font-family: var(--serif); font-size: 32px; margin-bottom: 4px; line-height: 1; }
+.pricing-price span { font-family: var(--sans); font-size: 13px; color: var(--muted); font-weight: 300; }
+.pricing-desc { font-size: 12px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+.pricing-features { list-style: none; font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; }
+.pricing-features li::before { content: '→ '; color: var(--accent); }
+.pricing-btn {
+  width: 100%; margin-top: 20px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  border: 0.5px solid var(--border2); border-radius: 6px;
+  padding: 9px; cursor: pointer;
+  background: transparent; color: var(--muted);
+  transition: all 0.2s;
+}
+.pricing-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+.pricing-card.featured .pricing-btn {
+  background: var(--accent); color: #051a0b; border-color: transparent;
+}
+.pricing-card.featured .pricing-btn:hover { opacity: 0.88; }
+
+/* FOOTER */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 40px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 760px; margin: 0 auto;
+}
+.footer-logo { font-family: var(--mono); font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+
+/* Status dot pulse */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.live { display: inline-flex; align-items: center; gap: 5px; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+
+/* Spinner */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { width: 12px; height: 12px; border: 2px solid rgba(5,26,11,0.3); border-top-color: #051a0b; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+
+/* Code highlight */
+.hl-key { color: var(--blue); }
+.hl-str { color: var(--accent); }
+.hl-num { color: var(--amber); }
+.hl-type { color: var(--coral); }
+
+@media(max-width:580px){
+  .how-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .hero { padding: 56px 24px 48px; }
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+}
+</style>
+
+<nav>
+  <div class="logo"><span class="logo-dot"></span>SentenceState</div>
+  <div class="nav-links">
+    <a href="#">Docs</a>
+    <a href="#">Examples</a>
+    <a href="#">Changelog</a>
+    <a href="#">Pricing</a>
+  </div>
+  <button class="nav-cta" onclick="sendPrompt('Tell me more about getting started with SentenceState')">Request access →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="live"><span class="live-dot"></span></span> Now in public beta</div>
+  <h1>Natural language<br>compiled into<br><em>deterministic apps</em></h1>
+  <p class="hero-sub">
+    SentenceState is a <strong>runtime for intention.</strong> Write what your app should do in plain English. We compile it into an event log — a precise, reproducible, auditable record that defines your entire application.
+  </p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('demo-input').focus(); sendPrompt('Show me how the SentenceState compiler works')">Try the compiler →</button>
+    <button class="btn-ghost" onclick="sendPrompt('Explain SentenceState event log format')">Read the spec</button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LIVE DEMO -->
+<section class="demo-section">
+  <div class="section-label">Live demo</div>
+  <div class="section-title">Type an intention.<br>Watch it compile.</div>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="demo-title-bar">sentencestate / compiler — runtime v0.9.4</div>
+    </div>
+
+    <div class="demo-input-area">
+      <div class="demo-input-label">Natural language input</div>
+      <textarea id="demo-input" class="demo-input" placeholder="Describe your application in plain English...
+
+e.g. &quot;When a user signs up, send a welcome email, create their profile, and start a 14-day trial.&quot;"></textarea>
+      <button class="demo-compile-btn" id="compile-btn" onclick="runCompile()">
+        <span id="compile-label">Compile to event log</span>
+      </button>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="pipeline" id="pipeline">
+      <div class="pipe-stage" id="stage-0">
+        <div class="pipe-icon">🔤</div>
+        <div class="pipe-name">Parse</div>
+      </div>
+      <div class="pipe-stage" id="stage-1">
+        <div class="pipe-icon">🧠</div>
+        <div class="pipe-name">Intent resolve</div>
+      </div>
+      <div class="pipe-stage" id="stage-2">
+        <div class="pipe-icon">⚡</div>
+        <div class="pipe-name">Event emit</div>
+      </div>
+      <div class="pipe-stage" id="stage-3">
+        <div class="pipe-icon">🔒</div>
+        <div class="pipe-name">Determinize</div>
+      </div>
+      <div class="pipe-stage" id="stage-4">
+        <div class="pipe-icon">🚀</div>
+        <div class="pipe-name">Deploy</div>
+      </div>
+    </div>
+
+    <!-- Event log -->
+    <div class="event-log" id="event-log">
+      <div class="log-empty">Event log will appear here after compilation...</div>
+    </div>
+
+    <!-- Replay bar -->
+    <div class="replay-bar">
+      <span class="replay-label">Replay</span>
+      <input type="range" class="replay-slider" id="replay-slider" min="0" max="0" value="0" oninput="replayTo(this.value)" style="flex:1">
+      <span class="replay-count" id="replay-count">0 / 0</span>
+      <button class="replay-btn" onclick="replayFrom0()">↺ Reset</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-label">How it works</div>
+  <div class="section-title">The compiler pipeline</div>
+
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-card-num">01 —</div>
+      <div class="how-card-title">You write intentions</div>
+      <div class="how-card-body">Describe what your application should do in natural language. No schemas, no boilerplate. <span class="how-card-accent">Any level of precision.</span></div>
+    </div>
+    <div class="how-card">
+      <div class="how-card-num">02 —</div>
+      <div class="how-card-title">SentenceState compiles</div>
+      <div class="how-card-body">The runtime parses your intent into a <span class="how-card-accent">canonical event log</span> — a sequence of typed, timestamped, ordered state transitions.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-card-num">03 —</div>
+      <div class="how-card-title">The log is the app</div>
+      <div class="how-card-body">The event log is the source of truth. <span class="how-card-accent">Replay it</span> to reproduce any state. Fork it. Audit it. Diff it across versions.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-card-num">04 —</div>
+      <div class="how-card-title">Deterministic output</div>
+      <div class="how-card-body">Same log → same app. Every time. On every machine. The runtime is a <span class="how-card-accent">pure function</span> of your event log.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="section-label">Platform features</div>
+  <div class="section-title">Built for production</div>
+
+  <div class="features-row">
+    <div class="feature-item">
+      <div class="feature-icon">📼</div>
+      <div>
+        <div class="feature-title">Event log as source of truth</div>
+        <div class="feature-desc">Your entire application is an append-only log of typed events. No hidden state. No side effects. Every transition is recorded, replayable, and forkable — from development to production.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔬</div>
+      <div>
+        <div class="feature-title">Intent compiler</div>
+        <div class="feature-desc">Natural language is parsed into structured intent trees, resolved against your application's type schema, and emitted as canonical events. Ambiguity is surfaced as a compile-time warning, not a runtime bug.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⏪</div>
+      <div>
+        <div class="feature-title">Time travel & replay</div>
+        <div class="feature-desc">Scrub through your application's entire history. Reproduce any state exactly. Debug by replaying the log up to the failing event. Ship hotfixes by inserting corrective events — no migrations needed.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔒</div>
+      <div>
+        <div class="feature-title">Deterministic runtime</div>
+        <div class="feature-desc">The SentenceState runtime is a pure function: log in, application out. No external dependencies, no environment-specific behaviour. The same event log produces identical output in CI, staging, and production.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🌿</div>
+      <div>
+        <div class="feature-title">Log branching & merging</div>
+        <div class="feature-desc">Branch your event log like a git repository. Experiment with alternative application histories. Merge branches with conflict resolution at the event level, not at the state level.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Predictable, event-based pricing</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Hobby</div>
+      <div class="pricing-price">$0 <span>/ month</span></div>
+      <div class="pricing-desc">For personal projects and exploration.</div>
+      <ul class="pricing-features">
+        <li>10k events / month</li>
+        <li>3 applications</li>
+        <li>30-day log retention</li>
+        <li>Community support</li>
+      </ul>
+      <button class="pricing-btn" onclick="sendPrompt('How do I sign up for SentenceState hobby plan?')">Get started</button>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most popular</div>
+      <div class="pricing-tier">Pro</div>
+      <div class="pricing-price">$49 <span>/ month</span></div>
+      <div class="pricing-desc">For teams shipping production applications.</div>
+      <ul class="pricing-features">
+        <li>5M events / month</li>
+        <li>Unlimited applications</li>
+        <li>1-year log retention</li>
+        <li>Log branching & merging</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="pricing-btn" onclick="sendPrompt('Tell me about the SentenceState Pro plan')">Start free trial</button>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-desc">For organizations with compliance needs.</div>
+      <ul class="pricing-features">
+        <li>Unlimited events</li>
+        <li>Self-hosted runtime</li>
+        <li>Infinite log retention</li>
+        <li>SSO & audit logs</li>
+        <li>Dedicated support</li>
+      </ul>
+      <button class="pricing-btn" onclick="sendPrompt('I want to talk to sales about SentenceState Enterprise')">Talk to sales</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><span class="logo-dot"></span> SentenceState Inc.</div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Status</a>
+    <a href="#">GitHub</a>
+  </div>
+</footer>
+
+<script>
+const presets = [
+  "When a user submits the signup form, validate their email, create an account, send a welcome email, and start a 14-day trial.",
+  "If a payment fails, retry three times with exponential backoff, then notify the user by email and pause their subscription.",
+  "When an order is placed, deduct inventory, charge the card, generate a receipt, and enqueue fulfillment.",
+  "Each time a document is edited, snapshot the current state, increment the version, and broadcast the change to active collaborators.",
+];
+
+const eventTemplates = {
+  intent: [
+    (txt) => `Parsed intent tree from "${txt.slice(0,40)}..."`,
+    () => `Resolved 3 ambiguous tokens → 0 warnings`,
+    () => `Intent graph: depth=4, breadth=2`,
+  ],
+  state: [
+    () => `Initial state snapshot created`,
+    () => `Schema validation passed (0 errors)`,
+    () => `Type bindings resolved`,
+  ],
+  action: [
+    () => `Action emitted: USER_SIGNUP_INITIATED`,
+    () => `Action emitted: EMAIL_VALIDATION_QUEUED`,
+    () => `Action emitted: ACCOUNT_RECORD_CREATED`,
+    () => `Action emitted: WELCOME_EMAIL_DISPATCHED`,
+    () => `Action emitted: TRIAL_PERIOD_STARTED`,
+    () => `Action emitted: LOG_CHECKPOINT_SEALED`,
+  ],
+  render: [
+    () => `Runtime snapshot written: hash=6a3f2e1`,
+    () => `Event log sealed: 8 events, deterministic`,
+    () => `Deployment ready — log replays in 0.4ms`,
+  ],
+};
+
+let compiledLog = [];
+let isCompiling = false;
+
+function timestamp() {
+  const now = new Date();
+  return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}.${String(Math.floor(Math.random()*999)).padStart(3,'0')}`;
+}
+
+function makeLogLine(type, msg, ts) {
+  return { type, msg, ts: ts || timestamp() };
+}
+
+async function runCompile() {
+  if (isCompiling) return;
+  const input = document.getElementById('demo-input').value.trim();
+  if (!input) {
+    const preset = presets[Math.floor(Math.random() * presets.length)];
+    document.getElementById('demo-input').value = preset;
+    return;
+  }
+
+  isCompiling = true;
+  compiledLog = [];
+  const btn = document.getElementById('compile-btn');
+  const label = document.getElementById('compile-label');
+  btn.disabled = true;
+  label.innerHTML = '<span class="spinner"></span> Compiling...';
+
+  document.getElementById('event-log').innerHTML = '';
+  resetPipeline();
+
+  const stages = [0,1,2,3,4];
+  const stageEvents = [
+    [
+      makeLogLine('intent', eventTemplates.intent[0](input)),
+      makeLogLine('intent', eventTemplates.intent[1]()),
+    ],
+    [
+      makeLogLine('state', eventTemplates.state[0]()),
+      makeLogLine('state', eventTemplates.state[1]()),
+      makeLogLine('state', eventTemplates.state[2]()),
+    ],
+    [
+      makeLogLine('action', eventTemplates.action[0]()),
+      makeLogLine('action', eventTemplates.action[1]()),
+      makeLogLine('action', eventTemplates.action[2]()),
+      makeLogLine('action', eventTemplates.action[3]()),
+    ],
+    [
+      makeLogLine('action', eventTemplates.action[4]()),
+      makeLogLine('action', eventTemplates.action[5]()),
+    ],
+    [
+      makeLogLine('render', eventTemplates.render[0]()),
+      makeLogLine('render', eventTemplates.render[1]()),
+      makeLogLine('render', eventTemplates.render[2]()),
+    ],
+  ];
+
+  for (let s = 0; s < stages.length; s++) {
+    document.getElementById('stage-'+s).className = 'pipe-stage active';
+    await sleep(400);
+    for (const ev of stageEvents[s]) {
+      compiledLog.push(ev);
+      appendLogLine(ev, compiledLog.length - 1);
+      await sleep(200 + Math.random()*180);
+    }
+    document.getElementById('stage-'+s).className = 'pipe-stage done';
+    await sleep(100);
+  }
+
+  const slider = document.getElementById('replay-slider');
+  slider.max = compiledLog.length;
+  slider.value = compiledLog.length;
+  document.getElementById('replay-count').textContent = `${compiledLog.length} / ${compiledLog.length}`;
+
+  btn.disabled = false;
+  label.innerHTML = '✓ Compiled — compile again';
+  isCompiling = false;
+}
+
+function appendLogLine(ev, idx) {
+  const el = document.createElement('div');
+  el.className = 'log-line';
+  el.id = 'log-'+idx;
+  el.innerHTML = `<span class="log-ts">${ev.ts}</span><span class="log-type ${ev.type}">${ev.type}</span><span class="log-msg">${ev.msg}</span>`;
+  document.getElementById('event-log').appendChild(el);
+  el.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function replayTo(n) {
+  const lines = document.querySelectorAll('.log-line');
+  lines.forEach((l,i) => { l.style.opacity = i < n ? '1' : '0.15'; });
+  document.getElementById('replay-count').textContent = `${n} / ${compiledLog.length}`;
+}
+
+function replayFrom0() {
+  const slider = document.getElementById('replay-slider');
+  slider.value = 0;
+  replayTo(0);
+}
+
+function resetPipeline() {
+  for(let i=0;i<5;i++) document.getElementById('stage-'+i).className='pipe-stage';
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Set a starter value
+document.getElementById('demo-input').placeholder = "Describe an application behaviour in plain English...\n\ne.g. \"When a user submits the signup form, validate their email, create an account, send a welcome email, and start a 14-day trial.\"";
+</script>
